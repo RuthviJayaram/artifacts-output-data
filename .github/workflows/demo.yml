@@ -28,7 +28,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: distant-files  #naming the artifact, useful for retrieving it
+          name: dist-files  #naming the artifact, useful for retrieving it
           # path: |           #Pipe symbol for multi-line instruction, where to find the files that should be stored
           #   dist
           #   package.json
@@ -37,5 +37,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifactd
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+      - name: Output contents
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
